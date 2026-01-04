@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Asees 🤍</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #3b1d6b, #0b0f2e);
+  color: #fff;
+}
+
+/* subtle stars */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(#ffffff33 1px, transparent 1px),
+    radial-gradient(#ffffff22 1px, transparent 1px);
+  background-size: 3px 3px, 6px 6px;
+  opacity: 0.2;
+}
+
+/* vertical text */
+.vertical-text {
+  position: fixed;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  letter-spacing: 2px;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  z-index: 2;
+}
+
+/* panda (hidden initially) */
+.panda {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  text-align: center;
+  z-index: 2;
+  display: none;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.panda .bubble {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  max-width: 170px;
+  line-height: 1.4;
+}
+
+.panda .emoji {
+  font-size: 46px;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.6));
+}
+
+/* scenes */
+#scene1, #scene2, #scene3 {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#scene2, #scene3 { display: none; }
+
+/* rose */
+.rose {
+  font-size: 90px;
+  cursor: pointer;
+  animation: pulse 2.8s infinite ease-in-out;
+  filter: drop-shadow(0 0 30px rgba(255,255,255,0.9));
+}
+
+/* heart */
+.heart {
+  font-size: 120px;
+  cursor: pointer;
+  animation: pulse 2s infinite ease-in-out;
+  filter: drop-shadow(0 0 40px rgba(255,100,180,0.9));
+}
+
+.bouquet {
+  margin-top: 20px;
+  font-size: 40px;
+}
+
+.hint {
+  margin-top: 16px;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+/* card */
+.card {
+  max-width: 900px;
+  width: 90%;
+  max-height: 75vh;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(16px);
+  border-radius: 26px;
+  padding: 40px;
+  box-shadow: 0 0 60px rgba(255,255,255,0.18);
+  overflow-y: auto;
+}
+
+/* scrollbar */
+.card::-webkit-scrollbar { width: 6px; }
+.card::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+/* text */
+h2 { margin-top: 0; font-weight: 500; }
+#text { white-space: pre-wrap; font-size: 1.15rem; line-height: 1.9; }
+
+/* cursor */
+.cursor {
+  border-right: 2px solid #fff;
+  animation: blink 0.8s infinite;
+}
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* floating */
+.float {
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp 20s linear infinite;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+}
+
+@keyframes floatUp {
+  to { transform: translateY(-120vh) scale(1.6); opacity: 0; }
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="vertical-text">HAPPY BIRTHDAY SWEETHEART</div>
+
+<div class="panda" id="panda">
+  <div class="bubble">
+    This is a gift from me to you 🤍<br>
+    because you love pandas<br>
+    and find them cute 🐼
+  </div>
+  <div class="emoji">🐼</div>
+</div>
+
+<!-- Scene 1 -->
+<div id="scene1">
+  <div class="rose" onclick="toScene2()">🤍🌹</div>
+  <div class="hint">for you · click</div>
+</div>
+
+<!-- Scene 2 -->
+<div id="scene2">
+  <div class="heart" onclick="toScene3()">💖</div>
+  <div class="bouquet">💐🤍🌹</div>
+  <div class="hint">one more thing…</div>
+</div>
+
+<!-- Scene 3 -->
+<div id="scene3">
+  <div class="card">
+    <h2 id="title"></h2>
+    <div id="text"></div>
+  </div>
+</div>
+
+<script>
+const titleText = "Hey Sunshine 🤍";
+const bodyText = `
+Happy Birthday, Asees 🌷✨
+
+I hope tonight feels gentle —
+like the universe slowed down
+just to smile at you 💫
+
+You have a quiet kind of magic.
+The kind that doesn’t try to impress,
+yet somehow makes everything softer.
+
+I miss you —
+in the calm moments,
+in the little things,
+in ways that feel warm, never heavy 🤍
+
+I hope you eat your favourite potatoes 🥔,
+have rice that tastes like comfort 🍚,
+and feel wrapped in warmth —
+even in the quiet moments.
+
+I love you.
+Not loudly.
+Not urgently.
+Just honestly.
+
+You’re my universe, Asees 💫🤍
+
+With love,
+Kevin 🤍💫
+`;
+
+let ti = 0, bi = 0;
+
+function toScene2(){
+  scene1.style.display = "none";
+  scene2.style.display = "flex";
+}
+
+function toScene3(){
+  scene2.style.display = "none";
+  scene3.style.display = "flex";
+
+  const panda = document.getElementById("panda");
+  panda.style.display = "block";
+  setTimeout(() => panda.style.opacity = 1, 50);
+
+  typeTitle();
+  setInterval(floatItem, 1000);
+}
+
+function typeTitle(){
+  if(ti < titleText.length){
+    title.innerHTML += titleText[ti++] + '<span class="cursor"></span>';
+    setTimeout(() => {
+      title.innerHTML = title.innerHTML.replace('<span class="cursor"></span>', '');
+      typeTitle();
+    }, 85); // slower
+  } else typeBody();
+}
+
+function typeBody(){
+  if(bi < bodyText.length){
+    text.innerHTML += bodyText[bi++] + '<span class="cursor"></span>';
+    setTimeout(() => {
+      text.innerHTML = text.innerHTML.replace('<span class="cursor"></span>', '');
+      typeBody();
+    }, 55); // slower
+  }
+}
+
+function floatItem(){
+  const el = document.createElement("div");
+  el.className = "float";
+  const items = ["🤍","🌹","💫","🥔","🍚"];
+  el.textContent = items[Math.floor(Math.random()*items.length)];
+  el.style.left = Math.random()*window.innerWidth + "px";
+  el.style.fontSize = (18 + Math.random()*22) + "px";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 20000);
+}
+</script>
+
+</body>
+</html>
